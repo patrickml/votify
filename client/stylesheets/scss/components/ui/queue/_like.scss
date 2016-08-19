@@ -1,0 +1,23 @@
+.like {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding-bottom: 18px;
+  text-align: center;
+  height: 20px;
+  width: 52px;
+  cursor: pointer;
+  i {
+    font-size: 20px;
+  }
+  &:after {
+    content: attr(data-count);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 12px;
+  }
+}

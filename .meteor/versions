@@ -8,6 +8,7 @@ blaze@2.1.8
 blaze-tools@1.0.9
 boilerplate-generator@1.0.9
 caching-compiler@1.0.6
+caching-html-compiler@1.0.6
 callback-hook@1.0.9
 check@1.2.3
 ddp@1.2.5
@@ -38,6 +39,7 @@ meteor-base@1.0.4
 meteorhacks:aggregate@1.3.0
 meteorhacks:collection-utils@1.2.0
 minifier-css@1.2.14
+minifier-js@1.1.13
 minimongo@1.0.17
 mobile-experience@1.0.4
 mobile-status-bar@1.0.12
@@ -63,6 +65,8 @@ seba:minifiers-autoprefixer@1.0.1
 shell-server@0.2.1
 spacebars@1.0.12
 spacebars-compiler@1.0.12
+static-html@1.1.12
+templating-tools@1.0.4
 tracker@1.1.0
 ui@1.0.11
 underscore@1.0.9
