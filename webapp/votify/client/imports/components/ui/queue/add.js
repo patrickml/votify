@@ -12,7 +12,7 @@ import { Session } from 'meteor/session';
 const onClick = (track) => () => (
   // Assign extra field w/ current User identifier to track 'upvotes'
   Votify.Collections.Tracks()
-    .create(Object.assign({}, track, { votes: [Session.get('uuid')] }))
+    .create(Object.assign({}, track, { votes: [Session.get('uuid')], votesCount: 1 }))
     .then(resetSearch)
 );
 

@@ -42,6 +42,10 @@ export default new SimpleSchema({
   name: {
     type: String,
   },
+  playing: {
+    type: Boolean,
+    defaultValue: false,
+  },
   popularity: {
     type: Number,
   },
@@ -59,5 +63,8 @@ export default new SimpleSchema({
   },
   votes: {
     type: [String],
+  },
+  votesCount: {
+    type: Number,
   },
 });
