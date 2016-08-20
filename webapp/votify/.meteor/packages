@@ -21,7 +21,9 @@ kadira:flow-router                  # Used to navigate through pages
 ## Templating ##
 fourseven:scss                      # Pre Processing of CSS
 seba:minifiers-autoprefixer         # Post Processing of CSS for cross browser support
-patrickml:underscore-get-dot-to-not # Highly used _. mixins
+static-html                         # Static html pages like head
 
+patrickml:underscore-get-dot-to-not # Highly used _. mixins
 patrickml:singularity               # ODM for Meteor Mongo
 patrickml:event-horizon             # FLUX for meteor
+http
