@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Votify from '/both/imports/app';
 import { resetSearch } from '../../../actions/search.actions';
+import { Session } from 'meteor/session'
 
 /**
  * Creates a track in queue then reset the search
@@ -9,7 +10,8 @@ import { resetSearch } from '../../../actions/search.actions';
  * @return {Promise}
  */
 const onClick = (track) => () => (
-  Votify.Collections.Tracks().create(track).then(resetSearch)
+  // Assign extra field w/ current User identifier to track 'upvotes'
+  Votify.Collections.Tracks().create(Object.assign({track, {votes : [Session.get('uuid')]})).then(resetSearch)
 );
 
 const Add = ({ track }) => (

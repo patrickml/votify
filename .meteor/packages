@@ -29,3 +29,4 @@ patrickml:event-horizon             # FLUX for meteor
 http
 aldeed:simple-schema
 aldeed:collection2
+u2622:persistent-session
