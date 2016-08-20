@@ -22,8 +22,8 @@ List.propTypes = {
 };
 
 export default composeWithTracker((props, onData) => {
-  const { tracks } = EventHorizon.subscribe('search');
   Meteor.subscribe('queue');
+  const { tracks } = EventHorizon.subscribe('search');
   const queueTracks = Votify.Collections.Tracks().cursor().fetch();
   onData(null, {
     tracks,
