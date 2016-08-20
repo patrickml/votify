@@ -29,7 +29,7 @@ const Cover = ({ url, playing, previewUrl }) => (
 
 Cover.propTypes = {
   url: PropTypes.string,
-  playing: PropTypes.string,
+  playing: PropTypes.bool,
   previewUrl: PropTypes.string,
 };
 
