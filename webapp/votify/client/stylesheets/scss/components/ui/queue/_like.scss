@@ -1,0 +1,27 @@
+.like {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding-bottom: 18px;
+  text-align: center;
+  height: 20px;
+  width: 52px;
+  cursor: pointer;
+  box-sizing: content-box;
+  i {
+    font-size: 20px;
+  }
+  .liked {
+    color: red;
+  }
+  &:after {
+    content: attr(data-count);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 12px;
+  }
+}

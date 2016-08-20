@@ -1,0 +1,52 @@
+import React, { PropTypes } from 'react';
+import { composeWithTracker } from 'react-komposer';
+import { Meteor } from 'meteor/meteor';
+import EventHorizon from 'meteor/patrickml:event-horizon';
+import Votify from '/both/imports/app';
+import Item from './item';
+
+const List = ({ queueTracks, tracks, search, query }) => (
+  <div>
+    <ul className="queue-list">
+      {
+        (search && tracks || queueTracks).map((track, key) => (
+          <Item key={key} track={track} search={search} />
+        ))
+      }
+    </ul>
+    <div className="no-content">
+      {
+        search && tracks.length < 1 && `Sorry, we don't have any songs for ${query}` || (
+          !search && queueTracks.length < 1 && (
+            `Hmmm... There are no songs in queue.
+            If you add one now, we will play your song right away!`
+          )
+        )
+      }
+    </div>
+  </div>
+);
+
+List.propTypes = {
+  queueTracks: PropTypes.array,
+  tracks: PropTypes.array,
+  search: PropTypes.bool,
+  query: PropTypes.string,
+};
+
+export default composeWithTracker((props, onData) => {
+  Meteor.subscribe('queue');
+  const { tracks, search } = EventHorizon.subscribe('search');
+  const queueTracks = Votify.Collections.Tracks()
+    .sortBy('playing', -1)
+    .sortBy('votesCount', -1)
+    .sortBy('createdAt', 1)
+    .cursor()
+    .fetch();
+  onData(null, {
+    tracks,
+    queueTracks,
+    search: !!search,
+    query: search || '',
+  });
+})(List);
