@@ -1,0 +1,16 @@
+.add {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  text-align: center;
+  height: 20px;
+  width: 52px;
+  cursor: pointer;
+  i {
+    font-size: 20px;
+    transform: rotate(45deg);
+    display: block;
+  }
+}
