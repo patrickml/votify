@@ -25,7 +25,7 @@ export default composeWithTracker((props, onData) => {
   Meteor.subscribe('queue');
   const { tracks } = EventHorizon.subscribe('search');
   const queueTracks = Votify.Collections.Tracks().sortBy('playing', -1)
-    .sortBy('votesCount', -1).cursor().fetch();
+    .sortBy('votesCount', -1).sortBy('createdAt', 1).cursor().fetch();
   onData(null, {
     tracks,
     queueTracks,

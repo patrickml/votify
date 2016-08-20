@@ -12,6 +12,12 @@ export default new SimpleSchema({
   available_markets: {
     type: [String],
   },
+  createdAt: {
+    type: Date,
+  },
+  createdBy: {
+    type: String,
+  },
   disc_number: {
     type: Number,
   },
