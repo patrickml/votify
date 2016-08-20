@@ -54,6 +54,17 @@
     padding-left: 15px;
     display: inline-block;
     vertical-align: middle;
+    width: calc(100% - 100px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    li {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+    }
     .name {
       font-weight: 600;
       font-size: 14px;
