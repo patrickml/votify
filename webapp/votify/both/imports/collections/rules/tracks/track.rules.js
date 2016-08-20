@@ -1,6 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import Votify from '/both/imports/app';
 
-const collection = Votify.Collections.Tracks().getCollection().getRawCollection();
+const collection = Votify.Collections.Tracks;
+const rawCollection = collection().getCollection().getRawCollection();
 
 /**
  * Performs actions after a document is updated
@@ -14,4 +16,18 @@ const afterUpdate = (userId, doc) => {
   }
 };
 
-collection.after.update(afterUpdate, { fetchPrevious: false });
+/**
+ * Performs actions before a document is inserted
+ * @method afterUpdate
+ * @param  {String}    userId the user Id
+ * @param  {Object}    doc    the document that was updated
+ */
+const beforeInsert = (userId, doc) => {
+  if (collection().where('id', '=', doc.id).cursor().count() > 0) {
+    throw new Meteor.Error('Duplicate', `There is already a track in queue for ${doc.name}`);
+    return false;
+  }
+};
+
+rawCollection.before.insert(beforeInsert);
+rawCollection.after.update(afterUpdate, { fetchPrevious: false });
