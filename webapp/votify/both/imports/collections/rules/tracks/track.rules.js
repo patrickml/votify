@@ -24,7 +24,7 @@ const afterUpdate = (userId, doc) => {
  */
 const beforeInsert = (userId, doc) => {
   if (collection().where('id', '=', doc.id).cursor().count() > 0) {
-    throw new Meteor.Error('Duplicate', `There is already a track in queue for ${doc.name}`);
+    throw new Meteor.Error('Duplicate', `${doc.name} is already queue.`);
     return false;
   }
 };
