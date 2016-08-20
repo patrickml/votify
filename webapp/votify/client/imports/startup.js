@@ -13,6 +13,6 @@ Meteor.startup(() => {
   Tracker.autorun(() => {
     const top = Votify.Collections.Tracks().firstSync();
     const image = top && _.get(top, 'album.images.0.url') || defaultBackground;
-    document.body.style.background = `url(${image}) no-repeat center center fixed/cover`;
+    document.body.style.backgroundImage = `url(${image})`;
   });
 });
