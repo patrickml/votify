@@ -6,6 +6,7 @@ const MainLayout = ({ content }) => (
     {content}
     <Alert
       stack
+      limit={1}
       timeout={2000}
       position="top"
       effect="jelly"
