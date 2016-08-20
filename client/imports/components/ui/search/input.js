@@ -24,13 +24,20 @@ const onChange = (event) => {
 };
 
 const Input = ({ search }) => (
-  <input
-    type="text"
-    onChange={onChange}
-    value={search}
-    className="search-input"
-    placeholder="Enter track or artist..."
-  />
+  <div className="search-input-container">
+    <input
+      type="text"
+      onChange={onChange}
+      value={search}
+      className="search-input"
+      placeholder="Enter track or artist..."
+    />
+    {
+      search && search.length > 0 && (
+        <i className="lnr lnr-cross" onClick={resetSearch} />
+      )
+    }
+  </div>
 );
 
 Input.propTypes = {
