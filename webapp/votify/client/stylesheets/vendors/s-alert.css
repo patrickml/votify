@@ -70,7 +70,7 @@
 .s-alert-close::after {
     content: '';
     position: absolute;
-    width: 3px;
+    width: 1px;
     height: 60%;
     top: 50%;
     left: 50%;
@@ -138,20 +138,24 @@
 /* conditions */
 
 .s-alert-info {
-    background: #00A2D3;
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #000;
+    border-bottom: solid 3px #00A2D3;
 }
 .s-alert-success {
-    background: rgba(39, 174, 96, 0.88);
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #000;
+    border-bottom: solid 3px rgba(39, 174, 96, 0.88);
 }
 .s-alert-warning {
-    background: #F1C40F;
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #000;
+    border-bottom: solid 3px #F1C40F;
 }
 .s-alert-error {
-    background: rgba(226, 90, 76, 0.88);
-    color: #fff;
+    background: rgb(255, 255, 255);
+    color: #000;
+    border-bottom: solid 3px #f00;
 }
 
 [class^="s-alert-effect-"].s-alert-hide,
@@ -179,12 +183,12 @@
 
 .s-alert-effect-jelly .s-alert-close::before,
 .s-alert-effect-jelly .s-alert-close::after {
-    background: #fff;
+    background: #000;
 }
 
 .s-alert-effect-jelly .s-alert-close:hover::before,
 .s-alert-effect-jelly .s-alert-close:hover::after {
-    background: #fff;
+    background: #000;
 }
 
 .s-alert-effect-jelly.s-alert-show {
