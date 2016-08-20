@@ -4,9 +4,10 @@ import { Session } from 'meteor/session';
 const onClick = (track) => () => {
   if (track.votes.indexOf(Session.get('uuid')) !== -1) {
     track.pull('votes', Session.get('uuid')).save();
+    track.set('votesCount', track.votesCount - 1).save();
   } else {
-    // Assign extra field w/ current User identifier to track 'upvotes'
     track.addToSet('votes', Session.get('uuid')).save();
+    track.set('votesCount', track.votesCount + 1).save();
   }
 };
 
