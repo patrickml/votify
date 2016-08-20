@@ -57,7 +57,7 @@ export default new SimpleSchema({
   uri: {
     type: String,
   },
-  votes : {
-    type : [String]
-  }
+  votes: {
+    type: [String],
+  },
 });
