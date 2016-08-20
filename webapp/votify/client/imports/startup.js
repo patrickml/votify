@@ -11,7 +11,11 @@ Meteor.startup(() => {
   Session.setDefaultPersistent('uuid', Meteor.uuid());
   // Whenever there is top track change the background image
   Tracker.autorun(() => {
-    const top = Votify.Collections.Tracks().firstSync();
+    const top = Votify.Collections.Tracks()
+      .sortBy('playing', -1)
+      .sortBy('votesCount', -1)
+      .sortBy('createdAt', 1)
+      .firstSync();
     const image = top && _.get(top, 'album.images.0.url') || defaultBackground;
     document.body.style.backgroundImage = `url(${image})`;
   });
