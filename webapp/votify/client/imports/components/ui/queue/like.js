@@ -3,11 +3,15 @@ import { Session } from 'meteor/session';
 
 const onClick = (track) => () => {
   if (track.votes.indexOf(Session.get('uuid')) !== -1) {
-    track.pull('votes', Session.get('uuid')).save();
-    track.set('votesCount', track.votesCount - 1).save();
+    track
+      .pull('votes', Session.get('uuid'))
+      .set('votesCount', track.votesCount - 1)
+      .save();
   } else {
-    track.addToSet('votes', Session.get('uuid')).save();
-    track.set('votesCount', track.votesCount + 1).save();
+    track
+      .addToSet('votes', Session.get('uuid'))
+      .set('votesCount', track.votesCount + 1)
+    .save();
   }
 };
 
