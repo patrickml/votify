@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { composeWithTracker } from 'react-komposer';
 import EventHorizon from 'meteor/patrickml:event-horizon';
 import search from '../../../spotify/search.api';
-import { setTracks, setSearch } from '../../../actions/search.actions';
+import { setTracks, setSearch, resetSearch } from '../../../actions/search.actions';
 
 // debounce the search so we don't over load the spotify servers
 const debounced = _.debounce((value) => {
@@ -12,11 +12,15 @@ const debounced = _.debounce((value) => {
 // call the dounced search onChange
 const onChange = (event) => {
   const value = event.target.value;
-  // set the search
-  setSearch(value);
 
-  // search for tracks
-  return debounced(value);
+  if (value.length > 0) {
+    // set the search
+    setSearch(value);
+    // search for tracks
+    debounced(value);
+  } else {
+    resetSearch();
+  }
 };
 
 const Input = ({ search }) => (
