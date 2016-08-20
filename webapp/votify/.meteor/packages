@@ -27,3 +27,5 @@ patrickml:underscore-get-dot-to-not # Highly used _. mixins
 patrickml:singularity               # ODM for Meteor Mongo
 patrickml:event-horizon             # FLUX for meteor
 http
+aldeed:simple-schema
+aldeed:collection2

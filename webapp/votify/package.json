@@ -49,7 +49,9 @@
       "new-cap": [
         "error",
         {
-          "capIsNewExceptions": []
+          "capIsNewExceptions": [
+            "Tracks"
+          ]
         }
       ]
     },
