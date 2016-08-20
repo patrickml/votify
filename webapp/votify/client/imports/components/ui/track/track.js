@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
 
-const Track = () => (
+const getArtists = (artists) => artists.map((artist) => artist.name).join(' & ');
+
+const Track = ({ track: { album, name, artists } }) => (
   <div className="track">
-    <img src="https://i.scdn.co/image/b68b39fdc2409d0f526ad48775ddcd93ff496cda" className="album" />
+    <img src={album.images[0].url} className="album" />
     <ul className="details">
-      <li className="name">I See Fire</li>
-      <li className="artist">Ed Sheeran</li>
+      <li className="name">{name}</li>
+      <li className="artist">by {getArtists(artists)}</li>
     </ul>
   </div>
 );
