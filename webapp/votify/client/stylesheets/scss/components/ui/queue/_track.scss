@@ -72,6 +72,11 @@
     .artist {
       font-size: 12px;
       opacity: 0.8;
+      .artistText {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }
