@@ -1,9 +1,22 @@
 .queue-list {
   list-style: none;
   padding: 0;
+  margin: 0;
   .queue-item {
     padding: 5px;
     border-bottom: solid 1px #e2e2e2;
     position: relative;
   }
+}
+
+.no-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 30px;
+  font-size: 13px;
+  text-align: center;
+  padding: 0 25px;
+  text-shadow: 0 0 3px #fff, 0 0 3px #fff;
 }

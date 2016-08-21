@@ -9,8 +9,12 @@
   height: 20px;
   width: 52px;
   cursor: pointer;
+  box-sizing: content-box;
   i {
     font-size: 20px;
+  }
+  .liked {
+    color: red;
   }
   &:after {
     content: attr(data-count);

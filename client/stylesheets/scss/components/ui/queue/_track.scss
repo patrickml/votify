@@ -4,12 +4,67 @@
     height: 50px;
     display: inline-block;
     vertical-align: middle;
+    position: relative;
+    .action {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      border-radius: 360px;
+      border: solid 1px rgba(0, 0, 0, 0.81);
+      width: 30px;
+      height: 30px;
+      box-shadow: 0px 0px 4px #fff;
+      &.play:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 7.5px 0 7.5px 10px;
+        border-color: transparent transparent transparent rgba(255, 255, 255, 0.81);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        margin-left: 11px;
+      }
+      &.stop:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px;
+        border-color: rgba(255, 255, 255, 0.81);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        margin-left: 9px;
+      }
+    }
   }
   .details {
     list-style: none;
     padding-left: 15px;
     display: inline-block;
     vertical-align: middle;
+    width: calc(100% - 100px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    li {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+    }
     .name {
       font-weight: 600;
       font-size: 14px;
