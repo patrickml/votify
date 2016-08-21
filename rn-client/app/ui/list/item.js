@@ -6,20 +6,13 @@ import {
   StyleSheet,
 } from 'react-native';
 import Like from './like';
-
-/**
- * Creates a list of artists from the array given from spotify
- * @method getArtists
- * @param  {Array}   artists the artists for the traack
- * @return {String}  the artists
- */
-const getArtists = (artists) => artists.map((artist) => artist.name).join(' & ');
+import getArtists from '../../util/get-artists';
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.5)',
+    backgroundColor: 'rgba(255,255,255,0.3)',
   },
   image: {
     width: 50,
