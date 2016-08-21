@@ -4,6 +4,7 @@ aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
+amplify@1.0.0
 autoupdate@1.2.11
 babel-compiler@6.9.1
 babel-runtime@0.1.11
@@ -39,6 +40,7 @@ kadira:flow-router@2.12.1
 launch-screen@1.0.12
 livedata@1.0.18
 logging@1.1.15
+matb33:collection-hooks@0.8.4
 mdg:validation-error@0.2.0
 meteor@1.2.17
 meteor-base@1.0.4
@@ -69,12 +71,14 @@ reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
 seba:minifiers-autoprefixer@1.0.1
+session@1.0.5
 shell-server@0.2.1
 spacebars@1.0.12
 spacebars-compiler@1.0.12
 static-html@1.1.12
 templating-tools@1.0.4
 tracker@1.1.0
+u2622:persistent-session@0.4.4
 ui@1.0.11
 underscore@1.0.9
 url@1.0.10
