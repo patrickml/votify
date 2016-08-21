@@ -19,7 +19,7 @@ shell-server@0.2.1                  # Server-side component of the `meteor shell
 kadira:flow-router                  # Used to navigate through pages
 
 ## Templating ##
-fourseven:scss@3.8.0_1              # Pre Processing of CSS
+fourseven:scss@=3.8.0_1              # Pre Processing of CSS
 seba:minifiers-autoprefixer         # Post Processing of CSS for cross browser support
 static-html                         # Static html pages like head
 
