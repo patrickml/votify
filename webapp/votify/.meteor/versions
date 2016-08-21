@@ -5,11 +5,7 @@ aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.5
 amplify@1.0.0
-<<<<<<< HEAD
 autoupdate@1.2.11
-=======
-autoupdate@1.3.11
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 babel-compiler@6.9.1
 babel-runtime@0.1.11
 base64@1.0.9
@@ -17,24 +13,14 @@ binary-heap@1.0.9
 blaze@2.1.8
 blaze-tools@1.0.9
 boilerplate-generator@1.0.9
-<<<<<<< HEAD
 caching-compiler@1.0.6
-=======
-caching-compiler@1.1.7
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 caching-html-compiler@1.0.6
 callback-hook@1.0.9
 check@1.2.3
 ddp@1.2.5
-<<<<<<< HEAD
 ddp-client@1.2.9
 ddp-common@1.2.6
 ddp-server@1.2.10
-=======
-ddp-client@1.3.1
-ddp-common@1.2.6
-ddp-server@1.3.10
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 deps@1.0.12
 diff-sequence@1.0.6
 ecmascript@0.5.8
@@ -42,16 +28,12 @@ ecmascript-runtime@0.3.14
 ejson@1.0.12
 es5-shim@4.6.14
 fastclick@1.0.12
-fourseven:scss@3.8.1
+fourseven:scss@3.8.0_1
 geojson-utils@1.0.9
 hot-code-push@1.0.4
 html-tools@1.0.10
 htmljs@1.0.10
-<<<<<<< HEAD
-http@1.1.8
-=======
 http@1.2.9
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 id-map@1.0.8
 jquery@1.11.9
 kadira:flow-router@2.12.1
@@ -59,21 +41,13 @@ launch-screen@1.0.12
 livedata@1.0.18
 logging@1.1.15
 matb33:collection-hooks@0.8.4
-<<<<<<< HEAD
 mdg:validation-error@0.2.0
-=======
-mdg:validation-error@0.5.1
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 meteor@1.2.17
 meteor-base@1.0.4
 meteorhacks:aggregate@1.3.0
 meteorhacks:collection-utils@1.2.0
-minifier-css@1.2.14
-<<<<<<< HEAD
+minifier-css@1.1.13
 minifier-js@1.1.13
-=======
-minifier-js@1.2.14
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 minimongo@1.0.17
 mobile-experience@1.0.4
 mobile-status-bar@1.0.12
@@ -97,11 +71,7 @@ reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
 seba:minifiers-autoprefixer@1.0.1
-<<<<<<< HEAD
 session@1.0.5
-=======
-session@1.1.6
->>>>>>> cf95db4718f165e0ba4688408348d6c516c469bb
 shell-server@0.2.1
 spacebars@1.0.12
 spacebars-compiler@1.0.12
