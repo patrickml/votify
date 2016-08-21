@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Cover from './cover';
 import searchSpotify from '../../../spotify/search.api';
-import { setTracks, setSearch, resetSearch } from '../../../actions/search.actions';
+import { setTracks, setSearch } from '../../../actions/search.actions';
 
 // debounce the search so we don't over load the spotify servers
 const debounced = _.debounce((value) => {
@@ -14,16 +14,19 @@ const debounced = _.debounce((value) => {
  * @param  {Array}   artists the artists for the traack
  * @return {String}  the artists
  */
-const getArtists = (artists) => artists.map((artist, i) => {
-  return (
-    <span key={artist.name}><span className="artistText"
+const getArtists = (artists) => artists.map((artist, i) => (
+  <span
+    key={artist.name}
+  >
+    <span
+      className="artistText"
       onClick={() => {
         setSearch(artist.name);
         debounced(artist.name);
       }}
     >
-    {artist.name}</span> {artists.length - 1 === i ? '' : ' & '}</span>);
-});
+    {artist.name}</span> {artists.length - 1 === i ? '' : ' & '}</span>
+  ));
 
 const Track = ({ track: { album, name, artists, preview_url } }) => (
   <div className="track">
