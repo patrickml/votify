@@ -39,24 +39,47 @@ class Player extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      initialized: false,
+    };
     this.playSong = this.playSong.bind(this);
     this.setDuration = this.setDuration.bind(this);
     this.duration = 100000;
-    this.range = 3;
   }
 
   componentDidMount() {
+    this.initializedInterval = setInterval(() => {
+      SpotifyAuth.initialized((res) => {
+        if (res) {
+          // let the component know the api is initialized
+          this.setState({
+            initialized: true,
+          });
+          // clear the interval
+          clearInterval(this.initializedInterval);
+        }
+      });
+    }, 500);
+    // onmount start the playlist
     this.playSong();
   }
 
-  shouldComponentUpdate({ track }) {
-    return (this.props.track && this.props.track.uri) !== (track && track.uri);
+  shouldComponentUpdate({ track }, { initialized }) {
+    // only update the component if the track has changed
+    return (
+      (this.props.track && this.props.track.uri) !== (track && track.uri) ||
+      this.state.initialized !== initialized
+    );
   }
 
   componentDidUpdate() {
+    // if the component updates play the next song
     this.playSong();
   }
 
+  /**
+   * Set the duration of the current song
+   */
   setDuration() {
     this.duration = 100000;
     SpotifyAuth.currentTrackDuration((res) => {
@@ -64,36 +87,42 @@ class Player extends Component {
     });
   }
 
+  /**
+   * Starts the timer that checks if the song has finished
+   */
   startPlayBackPositionTimer() {
     const { track } = this.props;
     this.setDuration();
     this.interval = setInterval(() => {
       SpotifyAuth.currentPlaybackPosition((position) => {
-        console.log(position, this.duration);
-        if (position + this.range > this.duration) {
+        console.log(Math.round(position) + 1, this.duration);
+        if (Math.round(position) + 2 > this.duration) {
           Meteor.collection('tracks').remove(track._id);
           clearInterval(this.interval);
         }
       });
-    }, 1000);
+    }, 500);
   }
 
+  /**
+   * Plays the next song in queue
+   */
   playSong() {
     const { track } = this.props;
     if (track) {
-      console.log(`Playing ${track.uri}`);
+      // update the song to show as playing so the list will not
+      // reorder and move this item
       Meteor.collection('tracks').update(track._id, {
         $set: {
           playing: true,
         },
       });
-      // we need to wait to play the song, sometime the app freezes if we don't wait
-      setTimeout(() => {
+      if (this.state.initialized) {
         SpotifyAuth.playURI(track.uri, (error) => {
           console.log(error);
           this.startPlayBackPositionTimer();
         });
-      }, this.range * 1000);
+      }
     }
   }
 

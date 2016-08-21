@@ -23,8 +23,12 @@ const styles = StyleSheet.create({
 
 class Page extends Component {
 
+  /**
+   * Get the background image for the page
+   */
   getBackgroundImage(tracks) {
-    return tracks && tracks[0] && tracks[0].album.images[0].url;
+    const defaultBackground = 'https://static.pexels.com/photos/6966/abstract-music-rock-bw.jpg';
+    return tracks && tracks[0] && tracks[0].album.images[0].url || defaultBackground;
   }
 
   render() {
