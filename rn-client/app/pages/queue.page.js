@@ -57,7 +57,7 @@ export default composeWithTracker((props, onData) => {
     sort: {
       playing: -1,
       votesCount: -1,
-      createdAt: -1,
+      createdAt: 1,
     },
   });
 
