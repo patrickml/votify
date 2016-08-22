@@ -1,6 +1,7 @@
 package com.votify;
 
 import com.facebook.react.ReactActivity;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 
 public class MainActivity extends ReactActivity {

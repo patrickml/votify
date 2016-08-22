@@ -7,6 +7,8 @@ import {
   NativeModules,
 } from 'react-native';
 import Meteor from 'react-native-meteor';
+import Actions from './actions';
+import { setPlaying } from '../../actions/player.actions';
 import getArtists from '../../util/get-artists';
 
 const styles = StyleSheet.create({
@@ -95,7 +97,6 @@ class Player extends Component {
     this.setDuration();
     this.interval = setInterval(() => {
       SpotifyAuth.currentPlaybackPosition((position) => {
-        console.log(Math.round(position) + 1, this.duration);
         if (Math.round(position) + 2 > this.duration) {
           Meteor.collection('tracks').remove(track._id);
           clearInterval(this.interval);
@@ -118,8 +119,10 @@ class Player extends Component {
         },
       });
       if (this.state.initialized) {
-        SpotifyAuth.playURI(track.uri, (error) => {
-          console.log(error);
+        console.log('Spotify Initialized');
+        SpotifyAuth.playURI(track.uri, (err) => {
+          console.log(err);
+          setPlaying(track.uri);
           this.startPlayBackPositionTimer();
         });
       }
@@ -136,6 +139,7 @@ class Player extends Component {
         <Image source={{ uri: track.album.images[0].url }} style={styles.cover} />
         <Text style={styles.title}>{track.name}</Text>
         <Text style={styles.artists}>{getArtists(track.artists)}</Text>
+        <Actions />
       </View>
     );
   }

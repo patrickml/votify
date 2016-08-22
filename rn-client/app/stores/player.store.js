@@ -1,9 +1,8 @@
 import EventHorizon from 'react-native-event-horizon';
 
 const defaultStore = {
-  canPlay: false,
   playing: false,
-  currentUri: '',
+  uri: '',
 };
 
 EventHorizon.createStore('player', defaultStore);
