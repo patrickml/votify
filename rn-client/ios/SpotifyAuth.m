@@ -10,6 +10,8 @@
 #import "SpotifyAuth.h"
 #import "SpotifyLoginViewController.h"
 #import "AppDelegate.h"
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 
 @interface SpotifyAuth ()
 @property (nonatomic, strong) SPTSession *session;
@@ -19,6 +21,7 @@
 @end
 
 @implementation SpotifyAuth
+@synthesize bridge = _bridge;
 
 RCT_EXPORT_MODULE()
 
@@ -44,7 +47,7 @@ RCT_EXPORT_METHOD(setClientID:(NSString *) clientID
      } else {
        block(@[[NSNull null]]);
      }
-     
+
    }];
 
   [self startAuth:clientID setRedirectURL:redirectURL setRequestedScopes:requestedScopes];
@@ -219,7 +222,7 @@ RCT_EXPORT_METHOD(playURIs:(NSArray *)uris withOptions:(NSDictionary *)options c
   if(options[@"startTime"] != nil){
     [playOptions setStartTime:[options[@"startTime"] floatValue]];
   }
-  
+
   //Turn all the strings in urisArr to NSURL
   for (int i = 0; i < [urisArr count]; i++) {
     urisArr[i] = [NSURL URLWithString:urisArr[i]];
@@ -244,7 +247,7 @@ RCT_EXPORT_METHOD(replaceURIs:(NSArray *)uris withCurrentTrack:(int)index callba
   for (int i = 0; i < [urisArr count]; i++) {
     urisArr[i] = [NSURL URLWithString:urisArr[i]];
   }
-  
+
   [sharedIn replaceURIs:urisArr withCurrentTrack:index callback:^(NSError *error) {
     if(error == nil){
       block(@[[NSNull null]]);
@@ -368,9 +371,9 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
   } else if ([searchQueryType  isEqual: @"playList"]){
     parm = SPTQueryTypePlaylist;
   }
-  
+
   [SPTSearch performSearchWithQuery:searchQuery queryType:parm offset:offset accessToken:[[[SpotifyAuth sharedManager] session] accessToken] market:market callback:^(NSError *error, id object) {
-    
+
     NSMutableDictionary *resObj = [NSMutableDictionary dictionary];
     NSMutableArray *resArr = [NSMutableArray array];
     for (int i; i < [[object items] count]; i++){
@@ -382,7 +385,7 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
     block(@[[NSNull null],resArr]);
     return;
   }];
-  
+
 }
 
 /////////////////////////////////
@@ -424,20 +427,20 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
   [[SPTAuth defaultInstance] setClientID:clientID];
   [[SPTAuth defaultInstance] setRedirectURL:[NSURL URLWithString:redirectURL]];
   [[SPTAuth defaultInstance] setRequestedScopes:scopes];
-  
-  // Construct a login URL 
+
+  // Construct a login URL
   NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
 
   AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
   // init the webView with the loginURL
   SpotifyLoginViewController *webView1 =[[SpotifyLoginViewController alloc] initWithURL:loginURL];
   UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController: webView1];
-  
+
   //Present the webView over the rootView
   [delegate.window.rootViewController presentViewController: controller animated:YES completion:nil];
-  
 
-  
+
+
   return YES;
 }
 
@@ -446,13 +449,13 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
   NSMutableDictionary *loginRes =  [NSMutableDictionary dictionary];
   if ([[SPTAuth defaultInstance] canHandleURL:url]) {
     [[SPTAuth defaultInstance] handleAuthCallbackWithTriggeredAuthURL:url callback:^(NSError *error, SPTSession *session) {
-      
+
       if (error != nil) {
         NSLog(@"*** Auth error: %@", error);
         loginRes[@"error"] = @"error while attempting to login!";
-        
+
       } else {
-      
+
       // Create a new player if needed
       if (self.player == nil) {
         //Set the session property to the seesion we got from the login Url
@@ -461,22 +464,60 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
         SPTAudioStreamingController *sharedIn = [SPTAudioStreamingController sharedInstance];
         [sharedIn startWithClientId:[SPTAuth defaultInstance].clientID error:nil];
         self.player = sharedIn;
+        self.player.delegate = self;
+        self.player.playbackDelegate = self;
+        self.player.diskCache = [[SPTDiskCache alloc] initWithCapacity:1024 * 1024 * 64];
         //keep this one
         [[SpotifyAuth sharedManager] setSession:session];
 
       }
-      
+
         [self.player loginWithAccessToken:_session.accessToken];
-        
+
       }
-      
+
     }];
   } else {
     loginRes[@"error"] = @"error while attempting to login!";
   }
   [center postNotificationName:@"loginRes" object:nil userInfo:loginRes];
   [center removeObserver:self name:@"loginRes" object:nil];
-  
+
+}
+
+// Track Player delegates
+
+- (void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didReceiveMessage:(NSString *)message {
+    NSLog(@"Message: %@", message);
+}
+
+- (void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didFailToPlayTrack:(NSURL *)trackUri {
+    NSLog(@"failed to play track: %@", trackUri);
+}
+
+
+- (void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangePlaybackStatus:(BOOL)isPlaying {
+    NSLog(@"is playing = %d", isPlaying);
+    [self.bridge.eventDispatcher sendAppEventWithName:@"didChangePlaybackStatus" body:nil];
+}
+
+// -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangePlaybackState:(SPTPlaybackState *)playbackState {
+//     NSLog(@"Playback State: %@", playbackState);
+// }
+
+- (void)audioStreamingDidLogout:(SPTAudioStreamingController *)audioStreaming {
+    NSLog(@"Did Logout:");
+}
+
+- (void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didEncounterError:(NSError *)error {
+    if (error != nil) {
+        NSLog(@"*** Playback got error: %@", error);
+        return;
+    }
+}
+
+- (void)audioStreamingDidLogin:(SPTAudioStreamingController *)audioStreaming {
+    NSLog(@"Did Login");
 }
 
 //Check if session is valid and renew it if not
@@ -494,7 +535,7 @@ RCT_EXPORT_METHOD(performSearchWithQuery:(NSString *)searchQuery
       }
     }];
   }
-  
+
 }
 
 -(void)setSession:(SPTSession *)session{

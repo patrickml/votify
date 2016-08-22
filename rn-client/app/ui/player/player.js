@@ -5,9 +5,12 @@ import {
   Image,
   StyleSheet,
   NativeModules,
+  NativeAppEventEmitter,
 } from 'react-native';
 import Meteor from 'react-native-meteor';
 import getArtists from '../../util/get-artists';
+
+NativeAppEventEmitter.addListener('didChangePlaybackStatus', (res) => console.log(res));
 
 const styles = StyleSheet.create({
   container: {
@@ -95,7 +98,6 @@ class Player extends Component {
     this.setDuration();
     this.interval = setInterval(() => {
       SpotifyAuth.currentPlaybackPosition((position) => {
-        console.log(Math.round(position) + 1, this.duration);
         if (Math.round(position) + 2 > this.duration) {
           Meteor.collection('tracks').remove(track._id);
           clearInterval(this.interval);

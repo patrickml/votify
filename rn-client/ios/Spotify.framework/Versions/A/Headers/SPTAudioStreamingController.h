@@ -69,9 +69,9 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 + (instancetype)sharedInstance;
 
 /** Start the `SPAudioStreamingController` thread with a custom audio controller.
- 
+
  @note You MUST initialize the `SPAudioStreamingController sharedInstance` before calling any other method.
- 
+
  @param clientId Your client id found at developer.spotify.com
  @param audioController Custom audio controller
  @param error If method returns NO, error will be set
@@ -80,9 +80,9 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(BOOL)startWithClientId:(NSString *)clientId audioController:(SPTCoreAudioController *)audioController error:(NSError *__autoreleasing*)error;
 
 /** Start the `SPAudioStreamingController` thread with the default audioController.
- 
+
  @note You need to start the `SPAudioStreamingController sharedInstance` before calling any other method.
- 
+
  @param clientId Your client id found at developer.spotify.com
  @param error If method returns NO, error will be set
  @return Returns YES if initialization was successful
@@ -99,20 +99,20 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 
 
 /** Log into the Spotify service for audio playback.
- 
+
  Audio playback will not be available until the receiver is successfully logged in.
- 
- @discussion Login is asynchronous. 
- Success will be notified on the `audioStreamingDidLogin:` delegate method and 
+
+ @discussion Login is asynchronous.
+ Success will be notified on the `audioStreamingDidLogin:` delegate method and
  failure will be notified on the `audioStreaming:didEncounterError:` delegate method.
- 
+
  @param accessToken An authenticated access token authorized with the `SPTAuthStreamingScope` scope.
  */
 -(void)loginWithAccessToken:(NSString *)accessToken;
 
 
 /** Log out of the Spotify service
- 
+
  @discussion This method is asynchronous. When logout is complete you will be notified by the
  `audioStreamingDidLogout:` delegate method.
  */
@@ -156,11 +156,11 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)setVolume:(SPTVolume)volume callback:(SPTErrorableOperationCallback)block;
 
 /** Set the target streaming bitrate.
- 
+
  The library will attempt to stream audio at the given bitrate. If the given
  bitrate is not available, the closest match will be used. This process is
  completely transparent, but you should be aware that data usage isn't guaranteed.
- 
+
  @param bitrate The bitrate to target.
  @param block The callback block to be executed when the command has been
  received, which will pass back an `NSError` object if an error ocurred.
@@ -186,7 +186,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)setIsPlaying:(BOOL)playing callback:(SPTErrorableOperationCallback)block;
 
 /** Play a Spotify URI.
- 
+
  Supported URI types: Tracks, Albums and Playlists
 
  @see -playURIs:withOptions:callback:
@@ -198,7 +198,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playURI:(NSURL *)uri callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Play a Spotify URI.
- 
+
  Supported URI types: Tracks, Albums and Playlists
 
  This function is deprecated and will be removed in the next version.
@@ -213,7 +213,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playURI:(NSURL *)uri fromIndex:(int)index callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Play a list of Spotify URIs.
- 
+
  Supported URI types: Tracks
 
  This function is deprecated and will be removed in the next version.
@@ -239,13 +239,13 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playURIs:(NSArray *)uris withOptions:(SPTPlayOptions *)options callback:(SPTErrorableOperationCallback)block;
 
 /** Set the current list of tracks.
- 
+
  Supported URI types: Tracks
 
  This function is deprecated and will be removed in the next version.
 
  @see -replaceURIs:withCurrentTrack:callback:
- 
+
  @param uris The list of URI's to play.
  @param block The callback block to be executed when the tracks are set, or an `NSError` object if an error ocurred.
  */
@@ -274,7 +274,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playURIsFromIndex:(int)index callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Play a track provider.
- 
+
  Supported types: SPTTrack, SPTAlbum and SPTPlaylist
 
  This function is deprecated and will be removed in the next version.
@@ -288,7 +288,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playTrackProvider:(id<SPTTrackProvider>)provider callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Play a track provider.
- 
+
  Supported types: SPTTrack, SPTAlbum and SPTPlaylist
 
  This function is deprecated and will be removed in the next version.
@@ -303,7 +303,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)playTrackProvider:(id<SPTTrackProvider>)provider fromIndex:(int)index callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Queue a Spotify URI.
- 
+
  Supported URI types: Tracks
 
  This function is deprecated and will be removed in the next version.
@@ -317,7 +317,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)queueURI:(NSURL *)uri callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Queue a Spotify URI.
- 
+
  Supported URI types: Tracks
 
  This function is deprecated and will be removed in the next version.
@@ -332,7 +332,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)queueURI:(NSURL *)uri clearQueue:(BOOL)clear callback:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Queue a list of Spotify URIs.
- 
+
  Supported URI types: Tracks
 
  This function is deprecated and will be removed in the next version.
@@ -348,7 +348,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)queueURIs:(NSArray *)uris clearQueue:(BOOL)clear callback:(SPTErrorableOperationCallback)block;
 
 /** Queue a track provider.
- 
+
  Supported types: SPTTrack
 
  This function is deprecated and will be removed in the next version.
@@ -377,37 +377,37 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 
  This function is deprecated and will be removed in the next version.
  @see -replaceURIs:withCurrentTrack:callback:
- 
+
  @param block The callback block to be executed when the queue is empty or an `NSError` object if an error ocurred.
  */
 -(void)queueClear:(SPTErrorableOperationCallback)block DEPRECATED_ATTRIBUTE;
 
 /** Stop playback and clear the queue and list of tracks.
- 
+
  @param block The callback block to be executed when playback stopped empty or an `NSError` object if an error ocurred.
  */
 -(void)stop:(SPTErrorableOperationCallback)block;
 
 /** Go to the next track in the queue.
- 
+
  @param block The callback block to be executed when the command has been
  received, which will pass back an `NSError` object if an error ocurred.
  */
 -(void)skipNext:(SPTErrorableOperationCallback)block;
 
 /** Go to the previous track in the queue
- 
+
  @param block The callback block to be executed when the command has been
  received, which will pass back an `NSError` object if an error ocurred.
  */
 -(void)skipPrevious:(SPTErrorableOperationCallback)block;
 
 /** Returns basic metadata about a track relative to the currently playing song, or `nil` if it doesn't exist or is unknown.
- 
+
  Passing an index of zero would mean the currently playing song, passing -1 is the previous one, passing 1 is the next one.
- 
+
  Metadata is under the following keys:
- 
+
  - `SPTAudioStreamingMetadataTrackName`: The track's name.
  - `SPTAudioStreamingMetadataTrackURI`: The track's Spotify URI.
  - `SPTAudioStreamingMetadataArtistName`: The track's artist's name.
@@ -422,9 +422,9 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)getRelativeTrackMetadata:(int)index callback:(void (^)(NSDictionary *))block DEPRECATED_ATTRIBUTE;
 
 /** Returns basic metadata about a specific track in the current track list, or `nil` if it doesn't exist or is unknown.
- 
+
  Metadata is under the following keys:
- 
+
  - `SPTAudioStreamingMetadataTrackName`: The track's name.
  - `SPTAudioStreamingMetadataTrackURI`: The track's Spotify URI.
  - `SPTAudioStreamingMetadataArtistName`: The track's artist's name.
@@ -442,9 +442,9 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 ///----------------------------
 
 /** Returns basic metadata about the currently playing track, or `nil` if there is no track playing.
- 
+
  Metadata is under the following keys:
- 
+
  - `SPTAudioStreamingMetadataTrackName`: The track's name.
  - `SPTAudioStreamingMetadataTrackURI`: The track's Spotify URI.
  - `SPTAudioStreamingMetadataArtistName`: The track's artist's name.
@@ -509,7 +509,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)audioStreamingDidLogout:(SPTAudioStreamingController *)audioStreaming;
 
 /** Called when the streaming controller encounters a temporary connection error.
- 
+
  You should not throw an error to the user at this point. The library will attempt to reconnect without further action.
 
  @param audioStreaming The object that sent the message.
@@ -517,7 +517,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)audioStreamingDidEncounterTemporaryConnectionError:(SPTAudioStreamingController *)audioStreaming;
 
 /** Called when the streaming controller encounters a fatal error.
- 
+
  At this point it may be appropriate to inform the user of the problem.
 
  @param audioStreaming The object that sent the message.
@@ -589,24 +589,24 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangeToTrack:(NSDictionary *)trackMetadata;
 
 /** Called when the streaming controller fails to play a track.
- 
+
  This typically happens when the track is not available in the current users' region, if you're playing
  multiple tracks the playback will start playing the next track automatically
- 
+
  @param audioStreaming The object that sent the message.
  @param trackUri The URI of the track that failed to play.
  */
 -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didFailToPlayTrack:(NSURL *)trackUri;
 
 /** Called when the streaming controller begins playing a new track.
- 
+
  @param audioStreaming The object that sent the message.
  @param trackUri The URI of the track that started to play.
  */
 -(void)audioStreaming:(SPTAudioStreamingController *)audioStreaming didStartPlayingTrack:(NSURL *)trackUri;
 
 /** Called before the streaming controller begins playing another track.
- 
+
  @param audioStreaming The object that sent the message.
  @param trackUri The URI of the track that stopped.
  */
@@ -641,7 +641,7 @@ FOUNDATION_EXPORT NSString * const SPTAudioStreamingMetadataTrackDuration DEPREC
 -(void)audioStreamingDidLosePermissionForPlayback:(SPTAudioStreamingController *)audioStreaming;
 
 /** Called when the streaming controller popped a new item from the playqueue.
- 
+
  @param audioStreaming The object that sent the message.
  */
 -(void)audioStreamingDidPopQueue:(SPTAudioStreamingController *)audioStreaming;
