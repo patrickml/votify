@@ -3,7 +3,7 @@ import {
   Image,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import loginButton from '../../assets/login-button-mobile.png';
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 export default () => (
   <View style={styles.container}>
-    <TouchableHighlight onPress={login}>
+    <TouchableOpacity onPress={login}>
       <View>
         <Text style={styles.welcome}>
           Welcome to Votify!
@@ -41,6 +41,6 @@ export default () => (
           source={loginButton}
         />
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   </View>
 );

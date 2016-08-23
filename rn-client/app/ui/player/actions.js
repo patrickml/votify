@@ -7,7 +7,7 @@ import {
 import EventHorizon from 'react-native-event-horizon';
 import { composeWithTracker } from 'react-native-meteor';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { togglePlayStatus, removeSong } from '../../util/player';
+import { togglePlayStatus, removeSong, fade } from '../../util/player';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ const Actions = ({ playing }) => (
         </TouchableOpacity>
       )
     }
-    <TouchableOpacity onPress={() => removeSong()}>
+    <TouchableOpacity onPress={() => fade(false, removeSong)}>
       <Icon name="ios-fastforward" size={30} color="#fff" />
     </TouchableOpacity>
   </View>

@@ -10,6 +10,7 @@ import Meteor from 'react-native-meteor';
 import Actions from './actions';
 import { setPlaying } from '../../actions/player.actions';
 import getArtists from '../../util/get-artists';
+import { fade } from '../../util/player';
 
 const styles = StyleSheet.create({
   container: {
@@ -97,6 +98,9 @@ class Player extends Component {
     this.setDuration();
     this.interval = setInterval(() => {
       SpotifyAuth.currentPlaybackPosition((position) => {
+        if (this.duration - position <= 3) {
+          fade();
+        }
         if (Math.round(position) + 2 > this.duration) {
           Meteor.collection('tracks').remove(track._id);
           clearInterval(this.interval);
@@ -119,9 +123,8 @@ class Player extends Component {
         },
       });
       if (this.state.initialized) {
-        console.log('Spotify Initialized');
-        SpotifyAuth.playURI(track.uri, (err) => {
-          console.log(err);
+        fade(true);
+        SpotifyAuth.playURI(track.uri, () => {
           setPlaying(track.uri);
           this.startPlayBackPositionTimer();
         });
