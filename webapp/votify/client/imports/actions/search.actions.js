@@ -20,6 +20,15 @@ EventHorizon.createAction('search', 'RESET_SEARCH', (store, tracks, update) => {
   update(defaultStore);
 });
 
+// Opens/closes album-view modal
+EventHorizon.createAction('search', 'SET_ALBUM', (store, albumID, update) => {
+  console.log(albumID);
+  update({
+    albumID,
+  });
+});
+
 export const setSearch = (search) => EventHorizon.dispatch('SET_SEARCH', search);
 export const setTracks = (tracks) => EventHorizon.dispatch('SET_SEARCH_ITEMS', tracks);
 export const resetSearch = () => EventHorizon.dispatch('RESET_SEARCH');
+export const setAlbumID = (albumID) => EventHorizon.dispatch('SET_ALBUM', albumID);

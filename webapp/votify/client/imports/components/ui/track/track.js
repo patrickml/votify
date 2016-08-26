@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Cover from './cover';
 import searchSpotify from '../../../spotify/search.api';
-import { setTracks, setSearch } from '../../../actions/search.actions';
+import { setTracks, setSearch, setAlbumID } from '../../../actions/search.actions';
 
 // debounce the search so we don't over load the spotify servers
 const debounced = _.debounce((value) => {
@@ -28,10 +28,10 @@ const getArtists = (artists) => artists.map((artist, i) => (
     {artist.name}</span> {artists.length - 1 === i ? '' : ' & '}</span>
   ));
 
-const Track = ({ track: { album, name, artists, preview_url } }) => (
+const Track = ({ track, track: { album, name, artists, preview_url } }) => (
   <div className="track">
     <Cover url={album.images[0].url} previewUrl={preview_url} />
-    <ul className="details">
+    <ul className="details" onClick={() => setAlbumID(track.album.id)}>
       <li className="name">{name}</li>
       <li className="artist">by {getArtists(artists)}</li>
     </ul>

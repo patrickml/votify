@@ -4,6 +4,7 @@ import EventHorizon from 'meteor/patrickml:event-horizon';
 const defaultStore = {
   search: '',
   tracks: [],
+  albumID: null,
 };
 
 // create the store;
