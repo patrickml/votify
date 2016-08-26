@@ -20,9 +20,10 @@ const getArtists = (artists) => artists.map((artist, i) => (
   >
     <span
       className="artistText"
-      onClick={() => {
+      onClick={(event) => {
         setSearch(artist.name);
         debounced(artist.name);
+        event.stopPropagation();
       }}
     >
     {artist.name}</span> {artists.length - 1 === i ? '' : ' & '}</span>
