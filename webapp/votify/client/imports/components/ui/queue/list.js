@@ -1,19 +1,26 @@
 import React, { PropTypes } from 'react';
 import { composeWithTracker } from 'react-komposer';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Meteor } from 'meteor/meteor';
 import EventHorizon from 'meteor/patrickml:event-horizon';
 import Votify from '/both/imports/app';
 import Item from './item';
 
+const transition = {
+  transitionName: 'list-item-animation',
+  transitionEnterTimeout: 300,
+  transitionLeaveTimeout: 300,
+};
+
 const List = ({ queueTracks, tracks, search, query }) => (
   <div>
-    <ul className="queue-list">
+    <ReactCSSTransitionGroup {...transition} className="queue-list" component="ul">
       {
-        (search && tracks || queueTracks).map((track, key) => (
-          <Item key={key} track={track} search={search} />
+        (search && tracks || queueTracks).map((track) => (
+          <Item key={track.id} track={track} search={search} />
         ))
       }
-    </ul>
+    </ReactCSSTransitionGroup>
     <div className="no-content">
       {
         search && tracks.length < 1 && `Sorry, we don't have any songs for ${query}` || (

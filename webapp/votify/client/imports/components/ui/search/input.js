@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { composeWithTracker } from 'react-komposer';
+import ReactInput from 'lazy-input';
 import EventHorizon from 'meteor/patrickml:event-horizon';
 import searchSpotify from '../../../spotify/search.api';
 import { setTracks, setSearch, resetSearch } from '../../../actions/search.actions';
@@ -25,7 +26,7 @@ const onChange = (event) => {
 
 const Input = ({ search }) => (
   <div className="search-input-container">
-    <input
+    <ReactInput
       type="text"
       onChange={onChange}
       value={search}
