@@ -5,6 +5,12 @@
     display: inline-block;
     vertical-align: middle;
     position: relative;
+    opacity: 0.4;
+    transition: ease 0.5s opacity;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
     .action {
       position: absolute;
       top: 0;
@@ -59,6 +65,7 @@
     overflow: hidden;
     word-wrap: normal;
     white-space: nowrap;
+    opacity: 0.7;
     li {
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -73,6 +80,7 @@
       font-size: 12px;
       opacity: 0.8;
       .artistText {
+        cursor: pointer;
         &:hover {
           text-decoration: underline;
         }
