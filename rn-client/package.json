@@ -1,0 +1,68 @@
+{
+  "name": "votify",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ios-start": "react-native run-ios",
+    "android-start": "react-native run-android"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-komposer": "^1.13.1",
+    "react-native": "0.31.0",
+    "react-native-blur": "^1.0.1",
+    "react-native-event-horizon": "^1.0.1",
+    "react-native-meteor": "^1.0.0-rc14",
+    "react-native-spotify": "^1.0.1",
+    "react-native-vector-icons": "^2.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb": "^8.0.0",
+    "eslint-plugin-import": "^1.6.0",
+    "eslint-plugin-jsx-a11y": "^1.0.3",
+    "eslint-plugin-meteor": "^3.5.2",
+    "eslint-plugin-react": "^5.0.1",
+    "stylelint": "^6.5.1",
+    "stylelint-config-standard": "^8.0.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb",
+      "plugin:meteor/guide"
+    ],
+    "rules": {
+      "import/no-unresolved": 0,
+      "func-names": 0,
+      "no-underscore-dangle": [
+        "error",
+        {
+          "allow": [
+            "_id",
+            "_ensureIndex",
+            "_verifyEmailToken",
+            "_resetPasswordToken",
+            "_name",
+            "_transform",
+            "_enrollAccountToken"
+          ]
+        }
+      ],
+      "new-cap": [
+        "error",
+        {
+          "capIsNewExceptions": [
+            "Tracks"
+          ]
+        }
+      ]
+    },
+    "globals": {
+      "_": true
+    }
+  }
+}
