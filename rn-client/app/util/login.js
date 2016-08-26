@@ -21,6 +21,6 @@ const login = (error) => {
  * @method login
  */
 export default () => {
-  const token = '9fc2c2b9481d449cbbdf3718ebbd0a75';
+  const token = '8423453c4a214eb4877037f259a64255';
   SpotifyAuth.setClientID(token, 'votify-login://callback', ['streaming'], login);
 };

@@ -60,7 +60,7 @@ npm-mongo@1.5.46
 observe-sequence@1.0.12
 ordered-dict@1.0.8
 patrickml:event-horizon@1.0.1
-patrickml:singularity@0.1.0
+patrickml:singularity@0.1.1
 patrickml:underscore-get-dot-to-not@1.0.0
 promise@0.8.4
 raix:eventemitter@0.1.3
