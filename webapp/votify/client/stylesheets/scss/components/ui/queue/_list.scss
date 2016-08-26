@@ -4,8 +4,28 @@
   margin: 0;
   .queue-item {
     padding: 5px;
-    border-bottom: solid 1px #e2e2e2;
+    border-bottom: solid 1px rgba(#e2e2e2, 0.71);
     position: relative;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    background: rgba(221,225,231,0.75);
+  }
+}
+
+.list-item-animation-enter {
+  transform: scale(0.7);
+  opacity: 0;
+  &.list-item-animation-enter-active {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.list-item-animation-leave {
+  opacity: 1;
+  transform: scale(1);
+  &.list-item-animation-leave-active {
+    opacity: 0.00;
+    transform: scale(0.7);
   }
 }
 
