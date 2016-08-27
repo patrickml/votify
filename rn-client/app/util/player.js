@@ -4,6 +4,7 @@ import {
 import Meteor from 'react-native-meteor';
 import { setPlayingStatus } from '../actions/player.actions';
 const { SpotifyAuth } = NativeModules;
+import getRandomSong from './fallback';
 
 let fading = false;
 
@@ -23,11 +24,12 @@ export const fade = (fadeIn = true, callback = () => {}, callbackFirst = false) 
     let volume = fadeIn ? 0 : 1;
     const interval = setInterval(() => {
       // increment or decrement our volume
-      volume = volume + (0.01 * (fadeIn ? 1 : -1));
+      volume += (0.01 * (fadeIn ? 1 : -1));
       // set the spotify volme
       SpotifyAuth.setVolume(volume, () => {});
       // once finished fading clear the interval and call the callback if needed
       if ((fadeIn && volume >= 1) || (!fadeIn && volume <= 0.01)) {
+        SpotifyAuth.setVolume(fadeIn ? 1 : 0, () => {});
         // clear the interval
         clearInterval(interval);
         // set the global fading variable to false
@@ -60,7 +62,7 @@ export const togglePlayStatus = (status) => {
  * Remove Top Song from Queue
  * @method removeSong
  */
-export const removeSong = () => {
+export const removeSong = (_id) => {
   // find the top song
   const track = Meteor.collection('tracks').findOne({}, {
     sort: {
@@ -69,6 +71,18 @@ export const removeSong = () => {
       createdAt: 1,
     },
   });
+
   // remove the top song
-  Meteor.collection('tracks').remove(track._id);
+  Meteor.collection('tracks').remove(_id || track._id);
+
+  // until we have real fallback playlists this will add a random song from the config
+  if (Meteor.collection('tracks').find().length < 1) {
+    Meteor.collection('tracks').insert(Object.assign({}, getRandomSong(), {
+      votes: ['host'],
+      votesCount: 1,
+      playing: false,
+      createdAt: new Date(),
+      createdBy: 'host',
+    }));
+  }
 };

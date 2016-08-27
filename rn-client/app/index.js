@@ -9,7 +9,7 @@ import QueuePage from './pages/queue.page';
 import './stores/index';
 import './actions/index';
 
-Meteor.connect('ws://votify-demo.herokuapp.com/websocket');
+Meteor.connect('wss://votify.us/websocket');
 
 const App = ({ loggedIn }) => (
   <View style={{ flex: 1 }}>

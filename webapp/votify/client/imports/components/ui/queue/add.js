@@ -10,23 +10,27 @@ import Alert from 'react-s-alert';
  * @param  {Object} track the track to add
  * @return {Promise}
  */
-const onClick = (track) => () => (
-  // Assign extra field w/ current User identifier to track 'upvotes'
-  Votify.Collections.Tracks()
-    .create(Object.assign({}, track, {
-      createdAt: new Date(),
-      createdBy: Session.get('uuid'),
-      votes: [Session.get('uuid')],
-      votesCount: 1,
-    }))
-    .then(resetSearch)
-    .then(() => (
-      Alert.success(`${track.name} added to queue!`)
-    ))
-    .catch(e => (
-      Alert.error(e.reason)
-    ))
-);
+const onClick = (track) => () => {
+  if (!track.explicit) {
+    // Assign extra field w/ current User identifier to track 'upvotes'
+    Votify.Collections.Tracks()
+      .create(Object.assign({}, track, {
+        createdAt: new Date(),
+        createdBy: Session.get('uuid'),
+        votes: [Session.get('uuid')],
+        votesCount: 1,
+      }))
+      .then(resetSearch)
+      .then(() => (
+        Alert.success(`${track.name} added to queue!`)
+      ))
+      .catch(e => (
+        Alert.error(e.reason)
+      ));
+  } else {
+    Alert.error('Sorry, you cannot add explicit songs at this party');
+  }
+};
 
 const Add = ({ track }) => (
   <div className="add" onClick={onClick(track)}>

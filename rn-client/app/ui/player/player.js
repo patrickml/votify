@@ -10,7 +10,7 @@ import Meteor from 'react-native-meteor';
 import Actions from './actions';
 import { setPlaying } from '../../actions/player.actions';
 import getArtists from '../../util/get-artists';
-import { fade } from '../../util/player';
+import { fade, removeSong } from '../../util/player';
 
 const styles = StyleSheet.create({
   container: {
@@ -102,7 +102,7 @@ class Player extends Component {
           fade();
         }
         if (Math.round(position) + 2 > this.duration) {
-          Meteor.collection('tracks').remove(track._id);
+          removeSong(track._id);
           clearInterval(this.interval);
         }
       });
